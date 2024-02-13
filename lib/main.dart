@@ -20,24 +20,50 @@ class MyApp extends StatelessWidget {
       GamesScreen(),
     ];
 
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AppState>(
-          create: (_) => AppState(),
-        ),
-      ],
-      child: MaterialApp(
-        title: 'Material App',
-        debugShowCheckedModeBanner: false,
-        home: Consumer<AppState>(
-          builder: (context, appState, child) {
-            return Scaffold(
-              appBar: const NexusAppBar(),
-              body: screens[appState.selectedScreen],
-              bottomNavigationBar: const NexusBottomNavBar(),
-            );
-          },
-        ),
+    return SafeArea(
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.purple,
+                    blurRadius: 20,
+                    blurStyle: BlurStyle.outer,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          MultiProvider(
+            providers: [
+              ChangeNotifierProvider<AppState>(
+                create: (_) => AppState(),
+              ),
+            ],
+            child: MaterialApp(
+              title: 'Material App',
+              debugShowCheckedModeBanner: false,
+              home: Consumer<AppState>(
+                builder: (context, appState, child) {
+                  return Scaffold(
+                    appBar: const NexusAppBar(),
+                    backgroundColor: Colors.transparent,
+                    body: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: screens[appState.selectedScreen],
+                    ),
+                    bottomNavigationBar: const NexusBottomNavBar(),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -12,17 +12,31 @@ class NexusBottomNavBar extends StatelessWidget {
     return Consumer<AppState>(
       builder: (context, appState, child) {
         return BottomNavigationBar(
-          items: const [
+          backgroundColor: Colors.transparent,
+          unselectedItemColor: Colors.white,
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.computer),
+              icon: Icon(
+                Icons.computer,
+                color:
+                    appState.selectedScreen == 0 ? Colors.blue : Colors.white,
+              ),
               label: "Room",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.local_drink),
+              icon: Icon(
+                Icons.local_drink,
+                color:
+                    appState.selectedScreen == 1 ? Colors.blue : Colors.white,
+              ),
               label: "Bar",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.gamepad_outlined),
+              icon: Icon(
+                Icons.gamepad_outlined,
+                color:
+                    appState.selectedScreen == 2 ? Colors.blue : Colors.white,
+              ),
               label: "Games",
             ),
           ],
