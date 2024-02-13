@@ -7,14 +7,24 @@ class LanRoomScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Swiper(
-        itemBuilder: (BuildContext context, int index) {
-          return ComputerWidget(index: index);
-        },
-        itemCount: 3,
-        control: const SwiperControl(),
-      ),
+    return Column(
+      children: [
+        Expanded(
+          child: Swiper(
+            itemBuilder: (BuildContext context, int index) {
+              return ComputerWidget(index: index);
+            },
+            itemCount: 3,
+            control: const SwiperControl(),
+          ),
+        ),
+        // Text(
+        //   "Hola",
+        //   style: TextStyle(
+        //     color: Colors.white,
+        //   ),
+        // )
+      ],
     );
   }
 }

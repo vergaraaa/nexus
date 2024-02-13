@@ -13,11 +13,15 @@ class ComputerWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(
-          Icons.computer,
-          size: 250,
-          color: Colors.blue,
+        const SizedBox(height: 60),
+        Container(
+          width: 275,
+          height: 175,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blue, width: 5),
+          ),
         ),
+        const SizedBox(height: 30),
         Text(
           "Computer ${index + 1}",
           style: const TextStyle(

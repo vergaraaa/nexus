@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         alignment: Alignment.topCenter,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 7),
             child: Container(
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
