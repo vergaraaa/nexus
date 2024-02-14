@@ -7,11 +7,13 @@ class AppState extends ChangeNotifier {
   DrinkModel? _selectedDrink;
   int _sipsLeft = 0;
   GameModel? _selectedGame;
+  bool _authenticated = false;
 
   int get selectedScreen => _selectedScreen;
   DrinkModel? get selectedDrink => _selectedDrink;
   int get sipsLeft => _sipsLeft;
   GameModel? get selectedGame => _selectedGame;
+  bool get authenticated => _authenticated;
 
   set selectedScreen(int index) {
     _selectedScreen = index;
@@ -26,6 +28,11 @@ class AppState extends ChangeNotifier {
 
   set selectedGame(GameModel? game) {
     _selectedGame = game;
+    notifyListeners();
+  }
+
+  set authenticated(bool authenticated) {
+    _authenticated = authenticated;
     notifyListeners();
   }
 

@@ -17,22 +17,22 @@ class DrinkBanner extends StatelessWidget {
               if (appState.selectedDrink == null)
                 const IconButton(
                   onPressed: null,
+                  iconSize: 50,
                   icon: Icon(
                     Icons.local_drink,
-                    size: 50,
                     color: Colors.grey,
                   ),
                 )
               else ...[
                 IconButton(
                   onPressed: () => appState.sip(),
+                  iconSize: 50,
                   icon: Icon(
                     Icons.local_drink,
-                    size: 50,
                     color: appState.selectedDrink!.color,
                   ),
                 ),
-                const SizedBox(width: 20),
+                const SizedBox(width: 10),
                 Text(
                   "Sips left: ${appState.sipsLeft}",
                   style: const TextStyle(

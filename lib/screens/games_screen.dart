@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/constants/constants.dart';
+import 'package:nexus/constants/dialogs.dart';
 import 'package:nexus/providers/app_state.dart';
 import 'package:provider/provider.dart';
 
@@ -29,42 +30,15 @@ class GamesScreen extends StatelessWidget {
           ),
           trailing: ElevatedButton(
             onPressed: () {
-              // if (appState.selectedGame != null) {
-              //   _showExistentGameDialog(context);
-              // } else {
-              appState.selectedGame = games[index];
-              appState.selectedScreen = 0;
-              // }
+              if (!appState.authenticated) {
+                Dialogs.showNeedAuthDialog(context);
+              } else {
+                appState.selectedGame = games[index];
+                appState.selectedScreen = 0;
+              }
             },
             child: const Text("Play"),
           ),
-        );
-      },
-    );
-  }
-
-  Future<dynamic> _showExistentGameDialog(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('You have a game already!'),
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Finish your game first and then order another one.'),
-                Text('We don\'t want heroes here...'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Got it!'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
         );
       },
     );

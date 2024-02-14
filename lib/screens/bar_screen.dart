@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/constants/constants.dart';
+import 'package:nexus/constants/dialogs.dart';
 import 'package:nexus/providers/app_state.dart';
 import 'package:provider/provider.dart';
 
@@ -34,39 +35,16 @@ class BarScreen extends StatelessWidget {
             ),
           ),
           onTap: () {
-            if (appState.selectedDrink != null) {
-              _showExistentDrinkDialog(context);
+            if (!appState.authenticated) {
+              Dialogs.showNeedAuthDialog(context);
             } else {
-              appState.selectedDrink = drinks[index];
+              if (appState.selectedDrink != null) {
+                Dialogs.showExistentDrinkDialog(context);
+              } else {
+                appState.selectedDrink = drinks[index];
+              }
             }
           },
-        );
-      },
-    );
-  }
-
-  Future<dynamic> _showExistentDrinkDialog(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('You have a drink already!'),
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Finish your drink first and then order another one.'),
-                Text('We don\'t want heroes here...'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Got it!'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
         );
       },
     );

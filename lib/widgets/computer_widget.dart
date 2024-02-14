@@ -44,6 +44,12 @@ class ComputerWidget extends StatelessWidget {
                 color: appState.selectedGame!.color,
                 height: 100,
                 width: 100,
+              ),
+            if (!appState.authenticated)
+              const Icon(
+                Icons.lock,
+                color: Colors.white,
+                size: 50,
               )
           ],
         );

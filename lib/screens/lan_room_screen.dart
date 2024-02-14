@@ -1,4 +1,3 @@
-import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:nexus/providers/app_state.dart';
 import 'package:nexus/widgets/computer_widget.dart';
@@ -11,14 +10,23 @@ class LanRoomScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppState>(
       builder: (context, appState, child) {
-        return ComputerWidget(index: 0);
-        // return Swiper(
-        //   itemBuilder: (BuildContext context, int index) {
-        //     return ComputerWidget(index: index);
-        //   },
-        //   itemCount: 3,
-        //   control: const SwiperControl(),
-        // );
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const ComputerWidget(index: 0),
+            const SizedBox(height: 20),
+            if (appState.selectedGame != null)
+              ElevatedButton(
+                onPressed: () => appState.selectedGame = null,
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Colors.red),
+                ),
+                child: const Text("Stop"),
+              )
+            else
+              const SizedBox(height: 47)
+          ],
+        );
       },
     );
   }
