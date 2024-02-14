@@ -3,6 +3,7 @@ import 'package:nexus/providers/app_state.dart';
 import 'package:nexus/screens/bar_screen.dart';
 import 'package:nexus/screens/games_screen.dart';
 import 'package:nexus/screens/lan_room_screen.dart';
+import 'package:nexus/widgets/drink_banner.dart';
 import 'package:nexus/widgets/nexus_app_bar.dart';
 import 'package:nexus/widgets/nexus_bottom_nav_bat.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +56,12 @@ class MyApp extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     body: Padding(
                       padding: const EdgeInsets.all(10),
-                      child: screens[appState.selectedScreen],
+                      child: Column(
+                        children: [
+                          Expanded(child: screens[appState.selectedScreen]),
+                          const DrinkBanner(),
+                        ],
+                      ),
                     ),
                     bottomNavigationBar: const NexusBottomNavBar(),
                   );
