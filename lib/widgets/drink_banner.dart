@@ -9,36 +9,39 @@ class DrinkBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppState>(
       builder: (context, appState, child) {
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            if (appState.selectedDrink == null)
-              const IconButton(
-                onPressed: null,
-                icon: Icon(
-                  Icons.local_drink,
-                  size: 50,
-                  color: Colors.grey,
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (appState.selectedDrink == null)
+                const IconButton(
+                  onPressed: null,
+                  icon: Icon(
+                    Icons.local_drink,
+                    size: 50,
+                    color: Colors.grey,
+                  ),
+                )
+              else ...[
+                IconButton(
+                  onPressed: () => appState.sip(),
+                  icon: Icon(
+                    Icons.local_drink,
+                    size: 50,
+                    color: appState.selectedDrink!.color,
+                  ),
                 ),
-              )
-            else ...[
-              IconButton(
-                onPressed: () => appState.sip(),
-                icon: Icon(
-                  Icons.local_drink,
-                  size: 50,
-                  color: appState.selectedDrink!.color,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                "Sips left: ${appState.sipsLeft}",
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              )
-            ]
-          ],
+                const SizedBox(width: 20),
+                Text(
+                  "Sips left: ${appState.sipsLeft}",
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                )
+              ]
+            ],
+          ),
         );
       },
     );
