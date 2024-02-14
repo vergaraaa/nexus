@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nexus/providers/app_state.dart';
+import 'package:provider/provider.dart';
 
 class Dialogs {
   static showNeedAuthDialog(BuildContext context) {
@@ -45,6 +47,28 @@ class Dialogs {
             TextButton(
               child: const Text('Got it!'),
               onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  static Future<void> authDialog(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Enter your member\'s code'),
+          content: const TextField(),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Go!'),
+              onPressed: () {
+                Provider.of<AppState>(context, listen: false).authenticated =
+                    true;
                 Navigator.of(context).pop();
               },
             ),

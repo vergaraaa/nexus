@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus/constants/dialogs.dart';
 
 class NexusAppBar extends StatelessWidget implements PreferredSizeWidget {
   const NexusAppBar({
@@ -13,7 +14,7 @@ class NexusAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: const Icon(Icons.person),
         tooltip: 'Sign in',
-        onPressed: () {},
+        onPressed: () => Dialogs.authDialog(context),
       ),
       actions: [
         IconButton(
