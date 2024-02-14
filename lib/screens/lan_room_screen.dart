@@ -11,13 +11,14 @@ class LanRoomScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppState>(
       builder: (context, appState, child) {
-        return Swiper(
-          itemBuilder: (BuildContext context, int index) {
-            return ComputerWidget(index: index);
-          },
-          itemCount: 3,
-          control: const SwiperControl(),
-        );
+        return ComputerWidget(index: 0);
+        // return Swiper(
+        //   itemBuilder: (BuildContext context, int index) {
+        //     return ComputerWidget(index: index);
+        //   },
+        //   itemCount: 3,
+        //   control: const SwiperControl(),
+        // );
       },
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nexus/providers/app_state.dart';
+import 'package:provider/provider.dart';
 
 class ComputerWidget extends StatelessWidget {
   const ComputerWidget({
@@ -10,27 +12,42 @@ class ComputerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(height: 60),
-        Container(
-          width: 275,
-          height: 175,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.blue, width: 5),
-          ),
-        ),
-        const SizedBox(height: 30),
-        Text(
-          "Computer ${index + 1}",
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.blue,
-          ),
-        )
-      ],
+    return Consumer<AppState>(
+      builder: (context, appState, child) {
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 60),
+                Container(
+                  width: 275,
+                  height: 175,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.blue, width: 5),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                const Text(
+                  "Computer",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                  ),
+                )
+              ],
+            ),
+            if (appState.selectedGame != null)
+              Container(
+                color: appState.selectedGame!.color,
+                height: 100,
+                width: 100,
+              )
+          ],
+        );
+      },
     );
   }
 }
