@@ -77,4 +77,37 @@ class Dialogs {
       },
     );
   }
+
+  static Future<void> topUp(BuildContext context) async {
+    TextEditingController textEditingController = TextEditingController();
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Add more minutes'),
+          content: TextField(
+            controller: textEditingController,
+            keyboardType: TextInputType.number,
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Add'),
+              onPressed: () {
+                AppState appState =
+                    Provider.of<AppState>(context, listen: false);
+                appState.remainingTime = appState.remainingTime +
+                    int.parse(textEditingController.text);
+
+                if (!appState.timerRunning) {
+                  appState.startTimer();
+                  appState.timerRunning = true;
+                }
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
