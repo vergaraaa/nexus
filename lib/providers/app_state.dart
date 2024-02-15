@@ -26,11 +26,11 @@ class AppState extends ChangeNotifier {
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_remainingTime <= 0) {
         timer.cancel();
-        _authenticated = false;
         _selectedGame = null;
         _timerRunning = false;
+      } else {
+        _remainingTime--;
       }
-      _remainingTime--;
 
       notifyListeners();
     });

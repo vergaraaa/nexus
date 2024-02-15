@@ -84,7 +84,7 @@ class Dialogs {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Add more minutes'),
+          title: const Text('Add more seconds'),
           content: TextField(
             controller: textEditingController,
             keyboardType: TextInputType.number,

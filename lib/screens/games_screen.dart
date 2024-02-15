@@ -29,12 +29,17 @@ class GamesScreen extends StatelessWidget {
             ),
           ),
           trailing: ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (!appState.authenticated) {
                 Dialogs.showNeedAuthDialog(context);
               } else {
-                appState.selectedGame = games[index];
-                appState.selectedScreen = 0;
+                if (!appState.timerRunning) {
+                  await Dialogs.topUp(context);
+                }
+                if (appState.timerRunning) {
+                  appState.selectedGame = games[index];
+                  appState.selectedScreen = 0;
+                }
               }
             },
             child: const Text("Play"),
