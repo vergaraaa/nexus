@@ -78,16 +78,16 @@ class Dialogs {
     );
   }
 
-  static Future<bool> topUp(BuildContext context) async {
-    TextEditingController textEditingController = TextEditingController();
+  static Future<bool> topUp(
+      BuildContext context, TextEditingController controller) async {
     return await showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Add more seconds'),
+          title: const Text('Add seconds to play'),
           content: TextField(
-            controller: textEditingController,
+            controller: controller,
             keyboardType: TextInputType.number,
           ),
           actions: <Widget>[
@@ -100,14 +100,6 @@ class Dialogs {
             TextButton(
               child: const Text('Add'),
               onPressed: () {
-                AppState appState =
-                    Provider.of<AppState>(context, listen: false);
-                appState.remainingTime = appState.remainingTime +
-                    int.parse(textEditingController.text);
-                if (!appState.timerRunning) {
-                  appState.timerRunning = true;
-                }
-
                 Navigator.pop(context, true);
               },
             ),

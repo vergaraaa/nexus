@@ -12,7 +12,7 @@ class GamesViewModel {
       Dialogs.showNeedAuthDialog(context);
     } else {
       if (!appState.timerRunning) {
-        await Dialogs.topUp(context);
+        Dialogs.timeOver(context);
       }
       if (appState.timerRunning) {
         appState.selectedGame = game;

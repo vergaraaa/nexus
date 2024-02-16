@@ -12,20 +12,27 @@ class AppBarViewModel {
     if (!appState.authenticated) {
       Dialogs.showNeedAuthDialog(context);
     } else {
-      bool minutesAdded = await Dialogs.topUp(context);
+      TextEditingController controller = TextEditingController();
+      bool minutesAdded = await Dialogs.topUp(context, controller);
 
       if (minutesAdded) {
-        Timer.periodic(const Duration(seconds: 1), (timer) async {
-          if (appState.remainingTime <= 0) {
-            timer.cancel();
-            appState.timerRunning = false;
-            appState.selectedGame = null;
+        appState.remainingTime =
+            appState.remainingTime + int.parse(controller.text);
 
-            Dialogs.timeOver(context);
-          } else {
-            appState.remainingTime--;
-          }
-        });
+        if (!appState.timerRunning) {
+          appState.timerRunning = true;
+          Timer.periodic(const Duration(seconds: 1), (timer) async {
+            if (appState.remainingTime <= 0) {
+              timer.cancel();
+              appState.timerRunning = false;
+              appState.selectedGame = null;
+
+              Dialogs.timeOver(context);
+            } else {
+              appState.remainingTime--;
+            }
+          });
+        }
       }
     }
   }
