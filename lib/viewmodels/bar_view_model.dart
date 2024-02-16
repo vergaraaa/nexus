@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 class BarViewModel {
   void orderDrink(BuildContext context, DrinkModel drink) {
     AppState appState = Provider.of<AppState>(context, listen: false);
+
     if (!appState.authenticated) {
       Dialogs.showNeedAuthDialog(context);
     } else {

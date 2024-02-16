@@ -61,7 +61,7 @@ class Dialogs {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Enter your member\'s code'),
+          title: const Text('Enter your member\'s code to login'),
           content: const TextField(),
           actions: <Widget>[
             TextButton(
@@ -104,12 +104,31 @@ class Dialogs {
                     Provider.of<AppState>(context, listen: false);
                 appState.remainingTime = appState.remainingTime +
                     int.parse(textEditingController.text);
-
                 if (!appState.timerRunning) {
-                  appState.startTimer();
                   appState.timerRunning = true;
                 }
+
                 Navigator.pop(context, true);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  static Future<void> timeOver(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Your time is over'),
+          content: const Text("Top up again your time to continue playing."),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Got it!'),
+              onPressed: () {
+                Navigator.of(context).pop();
               },
             ),
           ],

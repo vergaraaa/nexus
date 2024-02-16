@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/constants/dialogs.dart';
 import 'package:nexus/providers/app_state.dart';
+import 'package:nexus/viewmodels/app_bar_view_model.dart';
 import 'package:provider/provider.dart';
 
 class NexusAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -28,13 +29,7 @@ class NexusAppBar extends StatelessWidget implements PreferredSizeWidget {
             IconButton(
               icon: const Icon(Icons.timer),
               tooltip: 'Top up minutes',
-              onPressed: () {
-                if (!appState.authenticated) {
-                  Dialogs.showNeedAuthDialog(context);
-                } else {
-                  Dialogs.topUp(context);
-                }
-              },
+              onPressed: () => AppBarViewModel().topUp(context),
             )
           ],
         );
