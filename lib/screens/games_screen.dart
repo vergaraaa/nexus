@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/constants/constants.dart';
-import 'package:nexus/constants/dialogs.dart';
-import 'package:nexus/providers/app_state.dart';
-import 'package:provider/provider.dart';
+import 'package:nexus/viewmodels/games_view_model.dart';
 
 class GamesScreen extends StatelessWidget {
   const GamesScreen({super.key});
@@ -10,7 +8,6 @@ class GamesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const games = Constants.games;
-    AppState appState = Provider.of<AppState>(context, listen: false);
 
     return ListView.builder(
       itemCount: games.length,
@@ -29,19 +26,7 @@ class GamesScreen extends StatelessWidget {
             ),
           ),
           trailing: ElevatedButton(
-            onPressed: () async {
-              if (!appState.authenticated) {
-                Dialogs.showNeedAuthDialog(context);
-              } else {
-                if (!appState.timerRunning) {
-                  await Dialogs.topUp(context);
-                }
-                if (appState.timerRunning) {
-                  appState.selectedGame = games[index];
-                  appState.selectedScreen = 0;
-                }
-              }
-            },
+            onPressed: () async => GamesViewModel().play(context, game),
             child: const Text("Play"),
           ),
         );
