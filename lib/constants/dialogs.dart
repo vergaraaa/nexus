@@ -78,10 +78,11 @@ class Dialogs {
     );
   }
 
-  static Future<void> topUp(BuildContext context) async {
+  static Future<bool> topUp(BuildContext context) async {
     TextEditingController textEditingController = TextEditingController();
-    return showDialog(
+    return await showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
           title: const Text('Add more seconds'),
@@ -90,6 +91,12 @@ class Dialogs {
             keyboardType: TextInputType.number,
           ),
           actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+            ),
             TextButton(
               child: const Text('Add'),
               onPressed: () {
@@ -102,7 +109,7 @@ class Dialogs {
                   appState.startTimer();
                   appState.timerRunning = true;
                 }
-                Navigator.of(context).pop();
+                Navigator.pop(context, true);
               },
             ),
           ],

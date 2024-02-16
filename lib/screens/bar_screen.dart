@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/constants/constants.dart';
-import 'package:nexus/constants/dialogs.dart';
-import 'package:nexus/providers/app_state.dart';
-import 'package:provider/provider.dart';
+import 'package:nexus/viewmodels/bar_view_model.dart';
 
 class BarScreen extends StatelessWidget {
   const BarScreen({super.key});
@@ -10,7 +8,6 @@ class BarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const drinks = Constants.drinks;
-    AppState appState = Provider.of<AppState>(context, listen: false);
 
     return ListView.builder(
       itemCount: drinks.length,
@@ -34,17 +31,10 @@ class BarScreen extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          onTap: () {
-            if (!appState.authenticated) {
-              Dialogs.showNeedAuthDialog(context);
-            } else {
-              if (appState.selectedDrink != null) {
-                Dialogs.showExistentDrinkDialog(context);
-              } else {
-                appState.selectedDrink = drinks[index];
-              }
-            }
-          },
+          trailing: ElevatedButton(
+            onPressed: () => BarViewModel().orderDrink(context, drink),
+            child: const Text("Order"),
+          ),
         );
       },
     );
